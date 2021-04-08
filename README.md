@@ -1,2 +1,2 @@
 # code
-Copulation of Data Science in Python Programming Codes
+Complication of Personal Data Science Projects in Jupyter Notebook format (Python)
