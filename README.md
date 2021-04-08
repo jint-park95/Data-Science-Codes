@@ -1,2 +1,2 @@
-# code
-Complication of Personal Data Science Projects in Jupyter Notebook format (Python)
+# Code
+Complication of Personal Data Science Projects (Python)
