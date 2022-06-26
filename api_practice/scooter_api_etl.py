@@ -45,7 +45,7 @@ credentials = service_account.Credentials.from_service_account_file(path)
 table_id = 'jintaepark-portoflio-project.bikeshare_analytics.test_upload'
 
 client = bigquery.Client(credentials=credentials)
-job_config = bigquery.LoadJobConfig(write_disposition="WRITE_TRUNCATE")
+job_config = bigquery.LoadJobConfig(write_disposition="WRITE_APPEND")
 
 job = client.load_table_from_dataframe(bike_df, table_id, job_config=job_config)  # Make an API request.
 job.result()  # Wait for the job to complete.
