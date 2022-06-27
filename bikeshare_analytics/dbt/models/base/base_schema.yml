@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: base__bike_location
+    description: Base table for bike location etl data. Updated every 30 seconds.
+
+    columns:
+      - name: bike_id
+        description: identifier for individual bikes
+      - name: vehicle_type_id
+        description: vehicle type indicator
+      - name: lat
+        description: latitude
+      - name: lon
+        description: longitude
+      - name: is_reserved
+        description: indicator for reservation
+      - name: is_disabled
+        description: indicator for disabled
+      - name: pricing_plan_id
+        description: pricing plan dedicated for vehicle
+      - name: last_updated_ct
+        description: last updated location in central time
