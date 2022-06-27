@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "jintaepark-portfolio-project",
+  "private_key_id": "606d9807ba023a519877ece519eb2d8d23d878e3",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCksOnRRP/MoK/O\nH4rWYigdxLWuvpTo0ThPicbITdRPvAXfVFckhjSoegaUHGhWsCom9tS+lTJe7c8k\n2PmWufTmrjoIHoYoDgodQp2qAl4S1pJGd/0v5eqjWaQ05SJa9hlSO7j55k0Z6d6b\nJgAPHd1KndS1PZvUjyPG8Hk+82TCIDAwao9EHTKsZ2uYifyLV4Q+YFm8uywU8X1m\n8BJftVFq3opVRCk0rGXPJkp+ut1SQkHR9q5UEaqFtkaNmsackY77J+ZpRjQQXnPu\nUPyj/EGLLcaOGiyHj5L4PxuEA7/S1KN8a1MxJAkp5ZBwzw2SdV/xq5QZqM2M6ln6\n3Hf6Qcq3AgMBAAECggEAULVWULUEus5Aeb4hdwBxcm01MCa7qQDnHKuDXCQwGMcn\nBZQ6hG60nZ/3W1w0kc8RSTkLdz58ieL28bLXVdNZvjbBv7rdugFvWXmM9ITmf0ri\nMmCZFoERJO5IN5fW50bVj+QuuWDwhfODoPrVapMTIH8Kf6tqk5d2TAcLFBuJVExS\nJxNah0vW0ikqk8tTfinpmFIntQU3KROidHDbcCPfee27aDUKpBbUGqzKc/uSQERL\nfI+D6kgxOiwoY7r2thxR+vhg6hqU2GT7brA8SvbbK8GxPErFY+lZewiGWBg0CKUq\nm5gTnUJRnloITiIqjtsN/LlLB7PsiDeuu0c9vDD12QKBgQDc6CG4vUmQsp8zogEI\nAsPRcGYYE+4kD6cdcsCl/UXu5UylsZjnHrkmRYSG7J2u1p431Y9FrWhg3Iaa7p3P\nZ9hKAFrEwUvRlhTJGd1n8lGwmwjRZU52Dg9s33PJtHZwi2yNDf3GZejbM1Zt/SPQ\njWughdN6xlICtUiJILzSHYz2vQKBgQC+2pfxpXSsystD+7+qNZbRJdWXHxrfjuq+\nhP1DhJiAZ/TdVJ5Qj02AK1ZmArne7VlCJlauoPgfmIQd/N/BxMvz0XAKbuccjrn2\nTPMXPTX7vBRvIzM9pZ0GK6c5eo/2hEU8rWyTbEZfIUcYwgjbyHRmKEv/RNMQaSuV\nowmJYPoogwKBgQCEEkzG9HRdDE3eQsc3EOAeAYModhH0gV86XfcLxmbfMzwl/A4c\nb+PmG73mJOUJOMsTOp0T3V8AOhhH3M2AyOcpJxkddSttPLtkmBAlK1znp2kYN+c2\n8aULRHUnbLs7AkB9/JVy3k7fbswHqkaVU1e7ewc66gLyF4wsX+REAuLaSQKBgHh2\nFlNSYFszwKpPOsFfA6tM2wyAeIDEfwvzertj9LGPa/FLGIW2fW85a1YFwHWhj6X9\n9tZQCWw/4pve4Qg3g5eICNS8/Sh8OYnpNcHkQ695Hdir+gqd/odHhEv2POmWwPC0\ncYR3Yc9nfK12wwqd8kIMizM6qJGCIB1Zg4pvaFWrAoGAfUMX9+LP0xeZtQwDDpuB\n0pV772QW9CuJJmALTpyeELTI3Fbz4QgIEoBlsN0EOyJ99C+dZQ+7ojEnwn8IkJ68\nOSisSmrQEAAeaDNNqxfpe0WF/7SvHNUrpD7Thu+EUEOgI1UiPUEiNgtbk0Wkw88H\nZ9Fp4F1M/EHJnpUdBY1eDk0=\n-----END PRIVATE KEY-----\n",
+  "client_email": "bikeshare-analytics-bq@jintaepark-portfolio-project.iam.gserviceaccount.com",
+  "client_id": "103272794397675693656",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bikeshare-analytics-bq%40jintaepark-portfolio-project.iam.gserviceaccount.com"
+}
