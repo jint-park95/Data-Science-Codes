@@ -42,7 +42,7 @@ bike_df.head()
 # Construct a BigQuery client object.
 path = r'C:\Users\jintp\Documents\GitHub\Data-Science-Codes\api_practice\auth\bikeshare_analytics_bq.json'
 credentials = service_account.Credentials.from_service_account_file(path)
-table_id = 'jintaepark-portoflio-project.bikeshare_analytics.test_upload'
+table_id = 'jintaepark-portoflio-project.bikeshare_analytics.bike_location'
 
 client = bigquery.Client(credentials=credentials)
 job_config = bigquery.LoadJobConfig(write_disposition="WRITE_APPEND")
