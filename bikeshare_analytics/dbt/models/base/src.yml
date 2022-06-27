@@ -1,0 +1,6 @@
+version: 2
+
+sources:
+  - name: bikeshare_analytics_etl
+    tables:
+      - name: raw__bikeshare_location
