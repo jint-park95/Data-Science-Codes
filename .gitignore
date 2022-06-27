@@ -1,4 +1,3 @@
 
 api_practice/auth/bikeshare_analytics_bq.json
-bikeshare_analytics/etl/auth/bikeshare_analytics_bq.json
-bikeshare_analytics/auth/dbt_bq.json
+bikeshare_analytics/auth/bikeshare_analytics_bq.json
