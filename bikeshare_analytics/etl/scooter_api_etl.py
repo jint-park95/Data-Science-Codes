@@ -41,7 +41,7 @@ def get_scooter_df(url="https://mds.linkyour.city/gbfs/us_tx_austin/gbfs.json"):
         print(f"Data last updated : {last_updated}")
         print(f"Dataframe contains {bike_df.shape[0]} rows and {bike_df.shape[1]} columns")
 
-    return bike_df
+        return bike_df
 
 bike_df = get_scooter_df()
 
