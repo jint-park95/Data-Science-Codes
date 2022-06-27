@@ -45,7 +45,7 @@ def get_scooter_df(url="https://mds.linkyour.city/gbfs/us_tx_austin/gbfs.json"):
 
 bike_df = get_scooter_df()
 
-def upload_df_to_bigquery(path=r'C:\Users\jintp\Documents\Auth',\
+def upload_df_to_bigquery(path=r'C:\Users\jintp\Documents\Auth\bikeshare_analytics_bq.json',\
     table=bike_df,\
     table_id='jintaepark-portfolio-project.bikeshare_analytics_etl.raw__bikeshare_location'):
     
