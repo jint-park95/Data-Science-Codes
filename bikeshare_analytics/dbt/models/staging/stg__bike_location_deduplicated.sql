@@ -75,9 +75,13 @@ filter_distance AS (
 
         * except(distance_in_meter),
         
-        /* Overwrite distance travled column with 0 for records not updated for 5+ minutes */
+        /* Overwrite distance travled column with 0 for records: 
+        - not updated for 5+ minutes 
+        - exceeding approx. speed of 200km/hour
+        */
         CASE 
             WHEN time_diff_in_seconds > 300 THEN 0
+            WHEN SAFE_DIVIDE(distance_in_meter, COALESCE(time_diff_in_seconds)) > 200*1000/3600 THEN 0
             ELSE distance_in_meter
         END AS distance_in_meter
 
