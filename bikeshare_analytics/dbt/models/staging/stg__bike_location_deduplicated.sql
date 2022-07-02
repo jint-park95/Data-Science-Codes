@@ -24,6 +24,7 @@ deduplicated AS (
 
         last_updated_ct,
         bike_id,
+        vehicle_type_id,
         lat,
         lon,
         is_reserved,
@@ -31,7 +32,7 @@ deduplicated AS (
         pricing_plan_id
 
     from non_zero_loc
-    GROUP BY 1,2,3,4,5,6,7
+    GROUP BY 1,2,3,4,5,6,7,8
 
 ),
 
