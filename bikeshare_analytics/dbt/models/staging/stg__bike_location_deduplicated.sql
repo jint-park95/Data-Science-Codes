@@ -4,7 +4,7 @@ WITH
 
 bike_location AS (
 
-    select * from `jintaepark-portfolio-project`.`bikeshare_analytics_dev`.`base__bike_location`
+    select * from {{ ref('base__bike_location') }}
 
 ),
 
@@ -55,14 +55,14 @@ add_lag_diff AS (
         /* Calculate the difference in last_updated_ct in seconds since the most recent update */
         datetime_diff(
             last_updated_ct, 
-            lag(last_updated_ct, 1) over(partition by bike_id order bylast_updated_ct), 
+            lag(last_updated_ct, 1) over(partition by bike_id order by last_updated_ct), 
             SECOND
         ) AS time_diff_in_seconds,
 
         /* Calculate the distance traveled between since the most recent update */
         ST_DISTANCE(
             bike_geo_loc, 
-            LAG(bike_geo_loc, 1) over(partition by bike_id order bylast_updated_ct)
+            LAG(bike_geo_loc, 1) over(partition by bike_id order by last_updated_ct)
         ) AS distance_in_meter
         
     from add_loc   
