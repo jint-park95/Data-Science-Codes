@@ -4,7 +4,7 @@ source as (
 
     select
         *
-    FROM {{ source('bikeshare_analytics_etl', 'raw__bikeshare_location') }}
+    from {{ source('bikeshare_analytics_etl', 'raw__bikeshare_location') }}
 
 ),
 
