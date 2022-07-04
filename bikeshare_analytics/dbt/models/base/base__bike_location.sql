@@ -14,15 +14,16 @@ renamed as (
 
         bike_id,
         vehicle_type_id,
-        CAST(lon AS DECIMAL) AS lon,
-        CAST(lat AS DECIMAL) AS lat,
+        cast(lon as decimal) AS lon,
+        cast(lat as decimal) AS lat,
         is_reserved,
         is_disabled,
         pricing_plan_id,
-        CAST(last_updated AS DATETIME) as last_updated_ct
+        cast(last_updated as datetime) as last_updated_ct
 
     from source
 
 )
 
 select * from renamed
+{{ dev_data_limit(datetime_column = 'last_updated_ct', increment = 'day', increment_value = 2) }}
