@@ -26,4 +26,4 @@ renamed as (
 )
 
 select * from renamed
-{{ dev_data_limit(datetime_column = 'last_updated_ct', increment = 'day', increment_value = 7) }}
+{{ dev_data_limit(datetime_column = 'last_updated_ct', increment = 'day', increment_value = 2) }}
