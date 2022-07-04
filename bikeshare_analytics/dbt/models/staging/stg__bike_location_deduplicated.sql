@@ -155,4 +155,4 @@ add_new_date_indicator as (
 
 )
 
-select * from extract_datetime
+select * from add_new_date_indicator
