@@ -1,18 +1,28 @@
-
+{{
+    config(
+        materialized = 'table',
+        partition_by = {
+            'field' : 'last_updated_ct',
+            'data_type' : 'timestamp',
+            'granularity' : 'day'
+        },
+        cluster_by = 'bike_id'
+    )
+}}
 
 WITH
 
-bike_location AS (
+bike_location as (
 
     select * from {{ ref('base__bike_location') }}
 
 ),
 
-non_zero_loc AS (
+non_zero_loc as (
 
-    SELECT *
-    FROM bike_location
-    WHERE 
+    select *
+    from bike_location
+    where 
         lon != 0 
         AND lat != 0
 
@@ -36,18 +46,18 @@ deduplicated AS (
 
 ),
 
-add_loc AS (
+add_loc as (
 
     select
 
         *,
-        ST_GEOGPOINT(lon, lat) AS bike_geo_loc
+        ST_GEOGPOINT(lon, lat) as bike_geo_loc
         
     from deduplicated
 
 ),
 
-add_lag_diff AS (
+add_lag_diff as (
 
     select
 
@@ -57,20 +67,20 @@ add_lag_diff AS (
         datetime_diff(
             last_updated_ct, 
             lag(last_updated_ct, 1) over(partition by bike_id order by last_updated_ct), 
-            SECOND
-        ) AS time_diff_in_seconds,
+            second
+        ) as time_diff_in_seconds,
 
         /* Calculate the distance traveled between since the most recent update */
-        ST_DISTANCE(
+        st_distance(
             bike_geo_loc, 
             LAG(bike_geo_loc, 1) over(partition by bike_id order by last_updated_ct)
-        ) AS distance_in_meter
+        ) as distance_in_meter
         
     from add_loc   
 
 ),
 
-filter_distance AS (
+filter_distance as (
 
     select
 
@@ -80,14 +90,69 @@ filter_distance AS (
         - not updated for 5+ minutes 
         - exceeding approx. speed of 200km/hour
         */
-        CASE 
-            WHEN time_diff_in_seconds > 300 THEN 0
-            WHEN SAFE_DIVIDE(distance_in_meter, COALESCE(time_diff_in_seconds)) > 200*1000/3600 THEN 0
-            ELSE distance_in_meter
-        END AS distance_in_meter
+        case
+            when time_diff_in_seconds > 300 then 0
+            when SAFE_DIVIDE(distance_in_meter, COALESCE(time_diff_in_seconds)) > 200*1000/3600 then 0
+            else distance_in_meter
+        end as distance_in_meter
 
 
     from add_lag_diff
+
+),
+
+movement_boolean as (
+
+    select
+
+        *,
+        case 
+            when lag(distance_in_meter, 1) over (partition by bike_id order by last_updated_ct) = 0 and distance_in_meter > 0 then true
+            else false
+        end as is_start_movement,
+
+        case
+            when lag(distance_in_meter, 1) over (partition by bike_id order by last_updated_ct) > 0 and distance_in_meter = 0 then true
+            else false
+        end as is_end_movement
+
+    
+    from filter_distance 
+
+
+),
+
+extract_datetime as (
+
+    select 
+
+        extract(year from last_updated_ct) as year_int,
+        extract(month from last_updated_ct) as month_int,
+        extract(day from last_updated_ct) as day_int,
+        *
+    
+    from movement_boolean
+
+),
+
+add_new_date_indicator as (
+
+    select
+
+        *,
+
+        case 
+            when day_int != lag(day_int, 1) over (partition by bike_id order by last_updated_ct) then true 
+            else false
+        end as is_new_day_ct,
+
+        case 
+            when month_int != lag(month_int, 1) over (partition by bike_id order by last_updated_ct) then true 
+            else false
+        end as is_new_month_ct
+
+    from extract_datetime
+
 )
 
-select * from filter_distance
+select * from extract_datetime
