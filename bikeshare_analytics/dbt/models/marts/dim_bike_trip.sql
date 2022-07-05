@@ -104,6 +104,15 @@ group_bike_trip as (
         bike_id, 
         bike_trip_rank
 
+),
+
+filtered_trip as (
+
+    select * from group_bike_trip
+    where 
+        distance_meter > 50 
+        AND trip_duration_second > 70
+
 )
 
-select * from group_bike_trip
+select * from filtered_trip
