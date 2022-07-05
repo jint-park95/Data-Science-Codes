@@ -107,12 +107,12 @@ movement_boolean as (
 
         *,
         case 
-            when lag(distance_in_meter, 1) over (partition by bike_id order by last_updated_ct) = 0 and distance_in_meter > 0 then true
+            when lead(distance_in_meter, 1) over(partition by bike_id order by last_updated_ct) > 0 and distance_in_meter = 0 then true
             else false
         end as is_start_movement,
 
         case
-            when lag(distance_in_meter, 1) over (partition by bike_id order by last_updated_ct) > 0 and distance_in_meter = 0 then true
+            when lead(distance_in_meter, 1) over(partition by bike_id order by last_updated_ct) = 0 and distance_in_meter > 0 then true
             else false
         end as is_end_movement,
 
@@ -143,12 +143,12 @@ add_new_date_indicator as (
         *,
 
         case 
-            when day_int != lag(day_int, 1) over (partition by bike_id order by last_updated_ct) then true 
+            when day_int != lag(day_int, 1) over(partition by bike_id order by last_updated_ct) then true 
             else false
         end as is_new_day_ct,
 
         case 
-            when month_int != lag(month_int, 1) over (partition by bike_id order by last_updated_ct) then true 
+            when month_int != lag(month_int, 1) over(partition by bike_id order by last_updated_ct) then true 
             else false
         end as is_new_month_ct
 
