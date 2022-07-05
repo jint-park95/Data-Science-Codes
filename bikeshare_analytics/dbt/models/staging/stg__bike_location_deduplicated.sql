@@ -114,13 +114,14 @@ movement_boolean as (
         case
             when lag(distance_in_meter, 1) over (partition by bike_id order by last_updated_ct) > 0 and distance_in_meter = 0 then true
             else false
-        end as is_end_movement
+        end as is_end_movement,
 
     
     from filter_distance 
 
 
 ),
+
 
 extract_datetime as (
 
