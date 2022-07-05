@@ -63,9 +63,21 @@ group_bike_trip as (
 
     select
 
-        *
+        bike_id,
+        bike_trip_rank,
+        min(last_updated_ct) as trip_begin_ct,
+        max(last_updated_ct) as trip_end_ct,
+        datetime_diff(max(last_updated_ct), min(last_updated_ct), second) as trip_duration,
+        sum(distance_in_meter) as meters_travled,
+        safe_divide(sum(distance_in_meter), datetime_diff(max(last_updated_ct), min(last_updated_ct), second)) as average_meters_per_second
 
     from bike_movement_order_joined
+
+    where bike_trip_rank is not null
+
+    group by 
+        bike_id, 
+        bike_trip_rank
 
 )
 
