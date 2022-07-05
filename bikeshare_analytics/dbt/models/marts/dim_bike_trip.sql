@@ -106,7 +106,4 @@ group_bike_trip as (
 
 )
 
-
 select * from group_bike_trip
-where 
-    trip_duration_second > 180
