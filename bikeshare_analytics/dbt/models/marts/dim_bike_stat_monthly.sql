@@ -38,12 +38,14 @@ bike_location as (
 
 ),
 
-bike_month_distinct as (
+bike_location_agg as (
 
     select
         
         format_datetime("%Y%m", last_updated_ct) as mnth,
-        bike_id
+        bike_id,
+        SUM(time_diff_in_seconds) as move_duration_second_total,
+        SUM(distance_in_meter) as move_distance_meter_total
 
     from bike_location
     
@@ -55,8 +57,11 @@ bike_monthly_join as (
 
     select
 
-        bike_month_distinct.mnth,
-        bike_month_distinct.bike_id,
+        bike_location_agg.mnth,
+        bike_location_agg.bike_id,
+
+        coalesce(bike_location_agg.move_duration_second_total, 0) as move_duration_second_total,
+        coalesce(bike_location_agg.move_distance_meter_total, 0) as move_distance_meter_total,
 
         coalesce(trip_agg.trip_count_total, 0) as trip_count_total,
         coalesce(trip_agg.trip_duration_second_total, 0) as trip_duration_second_total,
@@ -76,16 +81,13 @@ bike_monthly_join as (
             , 0
         ) as trip_average_speed_meter_per_second
 
-    from bike_month_distinct
+    from bike_location_agg
 
     left join trip_agg ON 
 
-        bike_month_distinct.mnth = trip_agg.trip_begin_mnth
-        AND bike_month_distinct.bike_id = trip_agg.bike_id
+        bike_location_agg.mnth = trip_agg.trip_begin_mnth
+        AND bike_location_agg.bike_id = trip_agg.bike_id
 
 )
 
 select * from bike_monthly_join
-order by mnth, trip_distance_meter_total desc
-
-
