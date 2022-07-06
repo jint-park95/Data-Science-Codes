@@ -19,7 +19,7 @@ renamed as (
         is_reserved,
         is_disabled,
         pricing_plan_id,
-        cast(last_updated as datetime) as last_updated_ct
+        datetime(cast(last_updated AS timestamp), "America/Chicago") AS last_updated_ct
 
     from source
 
