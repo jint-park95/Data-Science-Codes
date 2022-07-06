@@ -58,9 +58,23 @@ bike_monthly_join as (
         bike_month_distinct.mnth,
         bike_month_distinct.bike_id,
 
+        coalesce(trip_agg.trip_count_total, 0) as trip_count_total,
         coalesce(trip_agg.trip_duration_second_total, 0) as trip_duration_second_total,
         coalesce(trip_agg.trip_distance_meter_total, 0) as trip_distance_meter_total,
-        coalesce(safe_divide(trip_agg.trip_distance_meter_total, trip_agg.trip_duration_second_total), 0) as trip_average_speed_meter_per_second
+
+        coalesce(
+            safe_divide(
+                trip_agg.trip_distance_meter_total, 
+                trip_agg.trip_count_total)
+            , 0) 
+        as trip_average_distance_meter_per_trip,
+
+        coalesce(
+            safe_divide(
+                trip_agg.trip_distance_meter_total, 
+                trip_agg.trip_duration_second_total)
+            , 0
+        ) as trip_average_speed_meter_per_second
 
     from bike_month_distinct
 
