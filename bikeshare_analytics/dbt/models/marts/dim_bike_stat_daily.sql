@@ -4,8 +4,8 @@ trip as (
 
     select
      
-        datetime_trunc(trip_begin_ct, day) as trip_begin_day,
-        datetime_trunc(trip_begin_ct, day) as trip_end_day,
+        date(trip_begin_ct) as trip_begin_day,
+        date(trip_begin_ct) as trip_end_day,
         * 
 
     from {{ ref('fct_bike_trip') }}
@@ -42,7 +42,7 @@ bike_location_agg as (
 
     select
         
-        datetime_trunc(last_updated_ct, day) as trip_begin_day,
+        date(last_updated_ct) as trip_begin_day,
         bike_id,
         count(bike_id) as location_update_count,
         count(bike_id) / 1440 * 100 as location_uptime_perc,
