@@ -4,8 +4,8 @@ trip as (
 
     select
      
-        format_datetime("%Y%m", trip_begin_ct) as trip_begin_mnth,
-        format_datetime("%Y%m", trip_end_ct) as trip_end_mnth,
+        datetime_trunc(trip_begin_ct, day) as trip_begin_day,
+        datetime_trunc(trip_begin_ct, day) as trip_end_day,
         * 
 
     from {{ ref('fct_bike_trip') }}
@@ -16,11 +16,11 @@ trip_agg as (
 
     select
 
-        trip_begin_mnth,
+        trip_begin_day,
         bike_id,
-        COUNT(bike_id) as trip_count_total,
-        SUM(trip_duration_second) as trip_duration_second_total,
-        SUM(distance_meter) as trip_distance_meter_total
+        count(bike_id) as trip_count_total,
+        sum(trip_duration_second) as trip_duration_second_total,
+        sum(distance_meter) as trip_distance_meter_total
     
     from trip
 
@@ -42,10 +42,12 @@ bike_location_agg as (
 
     select
         
-        format_datetime("%Y%m", last_updated_ct) as mnth,
+        datetime_trunc(last_updated_ct, day) as trip_begin_day,
         bike_id,
-        SUM(time_diff_in_seconds) as move_duration_second_total,
-        SUM(distance_in_meter) as move_distance_meter_total
+        count(bike_id) as location_update_count,
+        count(bike_id) / 1440 * 100 as location_uptime_perc,
+        sum(time_diff_in_seconds) as move_duration_second_total,
+        sum(distance_in_meter) as move_distance_meter_total
 
     from bike_location
     
@@ -57,8 +59,11 @@ bike_monthly_join as (
 
     select
 
-        bike_location_agg.mnth,
+        bike_location_agg.trip_begin_day,
         bike_location_agg.bike_id,
+
+        coalesce(location_update_count, 0) as location_update_count,
+        coalesce(location_uptime_perc, 0) as location_uptime_perc,
 
         coalesce(bike_location_agg.move_duration_second_total, 0) as move_duration_second_total,
         coalesce(bike_location_agg.move_distance_meter_total, 0) as move_distance_meter_total,
@@ -83,10 +88,8 @@ bike_monthly_join as (
 
     from bike_location_agg
 
-    left join trip_agg ON 
-
-        bike_location_agg.mnth = trip_agg.trip_begin_mnth
-        AND bike_location_agg.bike_id = trip_agg.bike_id
+    left join trip_agg  
+        using (trip_begin_day, bike_id)
 
 )
 
