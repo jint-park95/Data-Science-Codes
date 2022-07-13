@@ -1,13 +1,16 @@
+{% set partitions_to_replace = [
+  'current_date',
+  'date_sub(current_date, interval 1 day)'
+] %}
+
 {{
-    config(
-        materialized = 'table',
-        partition_by = {
-            'field' : 'last_updated_ct',
-            'data_type' : 'timestamp',
-            'granularity' : 'day'
-        },
-        cluster_by = 'bike_id'
-    )
+  config(
+    materialized = 'incremental',
+    incremental_strategy = 'insert_overwrite',
+    partition_by = {'field': 'last_updated_ct', 'data_type': 'timestamp'},
+    partitions = partitions_to_replace,
+    cluster_by = 'bike_id'
+  )
 }}
 
 WITH
@@ -15,6 +18,9 @@ WITH
 bike_location as (
 
     select * from {{ ref('base__bike_location') }}
+    {% if is_incremental() %}
+    where date(last_updated_ct) in ( {{ partitions_to_replace | join(',') }} )
+    {% endif %}
 
 ),
 
