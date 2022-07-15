@@ -21,8 +21,11 @@ Goal:
 
 ### Analytics Pipeline
 
+#### Pipeline DAG:
+![image](https://user-images.githubusercontent.com/52013434/179142974-2ca1bdea-73a6-4cd6-892e-1a1fc0742e72.png)
+
 - base level - renaming and recasting. 1:1 with source table
-- staging - incrementally ingest raw location data / deduplicate / add business logic(s) for obvious GPS errors and consecutive movements
+- staging - incrementally ingest raw location data / deduplicate / add business logic(s) for obvious GPS errors and label consecutive movements
 - marts - Aggregate any consecutive movement as “trips” / Designed as a layer to be digested in BI layer (if exists)
 - reports - Aggregate day-over-day total of unoccpuied movement / Designed as a layer to be digested in BI layer (if exists)
 
