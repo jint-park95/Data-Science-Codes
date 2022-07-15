@@ -24,7 +24,7 @@ Goal:
 #### Pipeline DAG:
 ![image](https://user-images.githubusercontent.com/52013434/179142974-2ca1bdea-73a6-4cd6-892e-1a1fc0742e72.png)
 
-- source (`raw_bikeshare_location`) - 
+- source (`raw_bikeshare_location`) - destination for Python E/L
 - base level (`base__bike_location`) - renaming and recasting. 1:1 with source table
 - staging (`stg__bike_location_deduplicated`) - incrementally ingest raw location data / deduplicate / add business logic(s) for obvious GPS errors and label consecutive movements
 - marts (`fct_bike_trip`) - Aggregate any consecutive movement as “trips” / Designed as a layer to be digested in BI layer (if exists)
