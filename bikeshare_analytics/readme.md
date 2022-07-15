@@ -3,7 +3,7 @@
 #### Background:
 
 - In this project, I will create a small-scale Extract-Load-Transform pipeline using location data of unoccpuied bikeshare coming from [General Bikeshare Feed Specification](https://github.com/NABSA/gbfs)
-- Goal of this portfolio is to surface and report on unoccupied movement bike movements to be able to validate any suspicious movements or bike transportation un-associated with intended bike usages 
+- Goal of this portfolio is to surface and report on unoccupied movement bike movements to be able to validate any suspicious movements or transportating efforts un-associated with active users 
 
 #### This project is consisted in three parts:
 
