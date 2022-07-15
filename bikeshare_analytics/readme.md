@@ -25,6 +25,7 @@
 - source: `raw_bikeshare_location` - destination for Python E/L
 - base: `base__bike_location` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/base/base__bike_location.sql)) - renaming and recasting. 1:1 with source table
 - staging: `stg__bike_location_deduplicated` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/staging/stg__bike_location_deduplicated.sql)) - incrementally ingest raw location data / deduplicate / add business logic(s) for obvious GPS errors and label consecutive movements
+  - test
 - marts: `fct_bike_trip` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/marts/fct_bike_trip.sql)) - Aggregate any consecutive movement as “trips” / Designed as a layer to be digested in BI layer (if exists)
 - reports: `dim_bike_stat_daily` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/marts/dim_bike_stat_daily.sql)) - Aggregate day-over-day total of unoccpuied movement / Designed as a layer to be digested in BI layer (if exists)
 
