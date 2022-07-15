@@ -22,12 +22,31 @@
 #### Pipeline DAG:
 ![image](https://user-images.githubusercontent.com/52013434/179142974-2ca1bdea-73a6-4cd6-892e-1a1fc0742e72.png)
 
-- source: `raw_bikeshare_location` - destination for Python E/L
-- base: `base__bike_location` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/base/base__bike_location.sql)) - renaming and recasting. 1:1 with source table
-- staging: `stg__bike_location_deduplicated` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/staging/stg__bike_location_deduplicated.sql)) - incrementally ingest raw location data / deduplicate / add business logic(s) for obvious GPS errors and label consecutive movements
-  - test
-- marts: `fct_bike_trip` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/marts/fct_bike_trip.sql)) - Aggregate any consecutive movement as “trips” / Designed as a layer to be digested in BI layer (if exists)
-- reports: `dim_bike_stat_daily` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/marts/dim_bike_stat_daily.sql)) - Aggregate day-over-day total of unoccpuied movement / Designed as a layer to be digested in BI layer (if exists)
+source: 
+
+- `raw_bikeshare_location` in DAG
+- destination for aforementioned Python E/L
+
+base-level:
+- `base__bike_location` in DAG ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/base/base__bike_location.sql)) 
+- Focused on renaming and recasting 
+- 1:1 relationship with source table for clarity
+
+staging-level: 
+- `stg__bike_location_deduplicated` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/staging/stg__bike_location_deduplicated.sql)) 
+- With DBT scheduler running daily, this table is configured to insert & overwrite previous 2 days worth of raw location data
+  - If configured for a real business, this would be added with a recurring `--full-refresh` run once a week to ensure data accuracy
+- This layer also deduplicates any location data (in case of E/L issues), add business logic(s) to filter out obvious GPS errors and label consecutive movements to be later grouped
+
+marts: 
+- `fct_bike_trip` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/marts/fct_bike_trip.sql)) 
+- Aggregate any consecutive movement as “trips”
+- This layer would be an example of a BI layer - one most likely as a table with self-servicing potentials
+
+reports: 
+- `dim_bike_stat_daily` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/marts/dim_bike_stat_daily.sql)) 
+- Aggregate day-over-day total of unoccpuied movement
+- This layer would be an example of a BI layer - one most likely as a table for specific reporting function
 
 ### Report
 
