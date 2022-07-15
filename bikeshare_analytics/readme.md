@@ -37,7 +37,7 @@ staging-level:
 - `stg__bike_location_deduplicated` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/staging/stg__bike_location_deduplicated.sql)) 
 - With DBT scheduler running daily, this table is configured to insert & overwrite previous 2 days worth of raw location data
   - If configured for a real business, this would be added with a recurring `--full-refresh` run once a week to ensure data accuracy
-- This layer also deduplicates any location data (in case of E/L issues), add business logic(s) to filter out obvious GPS errors and label consecutive movements to be later grouped
+- This layer also deduplicates any location data (in case of E/L issues), add business logic(s) to filter out obvious GPS errors and label consecutive movements to be later grouped as trips using window functions
 
 marts: 
 - `fct_bike_trip` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/marts/fct_bike_trip.sql)) 
