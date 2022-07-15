@@ -4,7 +4,7 @@ This project is consisted in three parts:
 
 - extract/load: python script to extract / transform / load bikeshare data to BigQuery
 - transform: dbt project to ingest / transform / surface business-relevant datasets
-- report: jupiter notebook (python) for data visualization
+- report: present data & visualization that is relevant for ficticious business stakeholder by leveraging transformed data & jupiter notebook (python)
 
 Goal:
 
