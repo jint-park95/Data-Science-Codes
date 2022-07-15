@@ -41,12 +41,14 @@ staging-level:
 marts: 
 - `fct_bike_trip` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/marts/fct_bike_trip.sql)) 
 - Aggregate any consecutive movement as “trips”
-- This layer would be an example of a BI layer - one most likely as a table with self-servicing potentials
+- This layer would be an example of a BI layer, one most likely as a table with self-servicing potentials
+- Materialized as a table to be queried faster in BI tools
 
 reports: 
 - `dim_bike_stat_daily` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/marts/dim_bike_stat_daily.sql)) 
 - Aggregate day-over-day total of unoccpuied movement
-- This layer would be an example of a BI layer - one most likely as a table for specific reporting function
+- This layer would be an example of a BI layer, one most likely as a table for specific reporting function
+- Materialized as a table to be queried faster in BI tools
 
 ### Report
 
