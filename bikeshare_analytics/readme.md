@@ -1,17 +1,15 @@
 ### Project Overview
 
-This project is consisted in three parts:
+#### Background:
+
+- In this project, I will create a small-scale Extract-Load-Transform pipeline using location data of unoccpuied bikeshare coming from [General Bikeshare Feed Specification](https://github.com/NABSA/gbfs)
+- Goal of this portfolio is to surface and report on unoccupied movement bike movements to be able to validate any suspicious movements or bike transportation un-associated with intended bike usages 
+
+#### This project is consisted in three parts:
 
 - extract/load: python script to extract / transform / load bikeshare data to BigQuery
 - transform: dbt project to ingest / transform / surface business-relevant datasets
 - report: present data & visualization that is relevant for ficticious business stakeholder by leveraging transformed data & jupiter notebook (python)
-
-Goal:
-
-- Surface and report on unoccupied movement bike movements to be able to validate:
-    - Suspicious movements
-    - Transporting bike from station to station
-    - etc.
 
 ### E/L
 
