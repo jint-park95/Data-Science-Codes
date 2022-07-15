@@ -25,7 +25,8 @@
 source: 
 
 - `raw_bikeshare_location` in DAG
-- destination for aforementioned Python E/L
+- Destination for aforementioned Python E/L
+- Source freshness test is used to evaluate the last updated time of bike location (`last_updated_ct`), which will stop models to be materialized if the data is "stale" (2 or more days old)
 
 base-level:
 - `base__bike_location` in DAG ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/base/base__bike_location.sql)) 
