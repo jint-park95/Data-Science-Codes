@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: base__bike_location
+  - name: base__inactive_bike_location
     description: Base table for bike location etl data. Updated every 30 seconds.
 
     columns:
