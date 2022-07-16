@@ -48,7 +48,7 @@
 - This layer would be an example of a BI layer, one most likely as a table with self-servicing potentials
 - Materialized as a table to be queried faster in BI tools
 
-#### reports: 
+#### reports-level: 
 ![image](https://user-images.githubusercontent.com/52013434/179337774-8f6317d6-88d5-4b24-aacb-f8e70296f0d8.png)
 - `dim_bike_inactivity_stat_daily` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/marts/dim_bike_stat_daily.sql)) 
 - Aggregate day-over-day total of unoccpuied movement
