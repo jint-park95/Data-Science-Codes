@@ -8,7 +8,7 @@ trip as (
         date(trip_begin_ct) as trip_end_day,
         * 
 
-    from {{ ref('fct_bike_trip') }}
+    from {{ ref('fct_inactive_bike_trips') }}
 
 ),
 
@@ -34,7 +34,7 @@ bike_location as (
     
         * 
     
-    from {{ ref('stg__bike_location_deduplicated') }}
+    from {{ ref('stg__inactive_bike_location_deduplicated') }}
 
 ),
 

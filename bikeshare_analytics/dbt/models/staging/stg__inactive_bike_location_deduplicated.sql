@@ -17,7 +17,7 @@ WITH
 
 bike_location as (
 
-    select * from {{ ref('base__bike_location') }}
+    select * from {{ ref('base__inactive_bike_location') }}
     {% if is_incremental() %}
     where date(last_updated_ct) in ( {{ partitions_to_replace | join(',') }} )
     {% endif %}

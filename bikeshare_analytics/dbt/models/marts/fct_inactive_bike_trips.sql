@@ -20,7 +20,7 @@ bike_location as (
         is_start_movement,
         is_end_movement
 
-    from {{ ref('stg__bike_location_deduplicated') }}
+    from {{ ref('stg__inactive_bike_location_deduplicated') }}
 
 ),
 
