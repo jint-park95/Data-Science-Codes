@@ -59,4 +59,5 @@
 ### Report
 
 - Data visuliazation represented as exported Jupiter Notebook
-- Can easily be subsituted as BI layer
+- `daily_inactive_bike_stat` ([Link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/report/daily_inactive_bike_stat.ipynb))
+- Report on daily trend of inactive bike location statistics, including total inactive "trips" registered, distance travled, etc.
