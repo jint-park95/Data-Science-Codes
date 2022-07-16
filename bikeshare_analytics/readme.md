@@ -33,6 +33,7 @@
 - `base__inactive_bike_location` in DAG ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/base/base__bike_location.sql)) 
 - Focused on renaming and recasting 
 - 1:1 relationship with source table for clarity
+- Leverages `dev_data_limit()` macro to only use data from past 3 days in development environment for development speed 
 
 #### staging-level: 
 ![image](https://user-images.githubusercontent.com/52013434/179337730-88166443-09e0-48f2-a0ef-41aed7073e2d.png)
