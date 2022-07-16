@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_inactive_bike_trips
-    description: Aggregates any continuous changes in bike as a "trip"
+    description: Aggregates any continuous changes in inactive bike movement as a "trip"
 
     columns:
       - name: bike_id
