@@ -20,7 +20,7 @@
 ### Analytics Pipeline
 
 #### Pipeline DAG:
-![image](https://user-images.githubusercontent.com/52013434/179142974-2ca1bdea-73a6-4cd6-892e-1a1fc0742e72.png)
+![image](https://user-images.githubusercontent.com/52013434/179337003-8bfd142d-f075-4261-9fcb-31f3b1c0c037.png)
 
 source: 
 
@@ -29,24 +29,24 @@ source:
 - Source freshness test is used to evaluate the last updated time of bike location (`last_updated_ct`), which will stop models to be materialized if the data is "stale" (2 or more days old)
 
 base-level:
-- `base__bike_location` in DAG ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/base/base__bike_location.sql)) 
+- `base__inactive_bike_location` in DAG ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/base/base__bike_location.sql)) 
 - Focused on renaming and recasting 
 - 1:1 relationship with source table for clarity
 
 staging-level: 
-- `stg__bike_location_deduplicated` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/staging/stg__bike_location_deduplicated.sql)) 
+- `stg__inactive_bike_location_deduplicated` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/staging/stg__bike_location_deduplicated.sql)) 
 - With DBT scheduler running daily, this table is configured to insert & overwrite previous 2 days worth of raw location data
   - If configured for a real business, this would be added with a recurring `--full-refresh` run once a week to ensure data accuracy
 - This layer also deduplicates any location data (in case of E/L issues), add business logic(s) to filter out obvious GPS errors and label consecutive movements to be later grouped as trips using window functions
 
 marts: 
-- `fct_bike_trip` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/marts/fct_bike_trip.sql)) 
+- `fct_inactive_bike_trips` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/marts/fct_bike_trip.sql)) 
 - Aggregate any consecutive movement as “trips”
 - This layer would be an example of a BI layer, one most likely as a table with self-servicing potentials
 - Materialized as a table to be queried faster in BI tools
 
 reports: 
-- `dim_bike_stat_daily` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/marts/dim_bike_stat_daily.sql)) 
+- `dim_bike_inactivity_stat_daily` ([link](https://github.com/jint-park95/Data-Science-Codes/blob/main/bikeshare_analytics/dbt/models/marts/dim_bike_stat_daily.sql)) 
 - Aggregate day-over-day total of unoccpuied movement
 - This layer would be an example of a BI layer, one most likely as a table for specific reporting function
 - Materialized as a table to be queried faster in BI tools
