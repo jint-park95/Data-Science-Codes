@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: dim_bike_inactivity_stat_daily
+    description: Aggregate day-over-day total of unoccpuied bike movement
+
+    columns:
+      - name: trip_begin_day
+        description: day-by-day aggregation done by beginning of the trip
+      - name: bike_id
+        description: identifier for individual bikes
+      - name: location_update_count
+        description: total count of inactive location update in the given date (out of 1440)
+      - name: location_uptime_perc
+        description: location_update_count / location_uptime_perc * 100
+      - name: move_duration_second_total
+        description: total time in seconds registered with movement
+      - name: move_distance_meter_total
+        description: total distance in meters registered with movement
+      - name: trip_count_total
+        description: total inactive "trips" registered in a given date
+      - name: trip_duration_second_total
+        description: total time in seconds registered with inactive "trips" in a given date
+      - name: trip_distance_meter_total
+        description: total distance in meters registered with inactive "trips" in a given date
+      - name: trip_average_distance_meter_per_trip
+        description: trip_distance_meter_total / trip_count_total
+      - name: trip_average_speed_meter_per_second
+        description: trip_distance_meter_total / trip_duration_second_total
+

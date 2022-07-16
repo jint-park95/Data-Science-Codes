@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: stg__inactive_bike_location_deduplicated
+    description: incremental table for deduplicated inactive bike location with few business logic baked in
+
+    columns:
+      - name: year_int
+        description: year extracted as integer from last_updated_ct
+      - name: month_int
+        description: month extracted as integer from last_updated_ct
+      - name: day_int
+        description: day extracted as integer from last_updated_ct
+      - name: last_updated_ct
+        description: datetime associated with the bike location ('America/Chicago' time)
+      - name: bike_id
+        description: identifier for individual bikes
+      - name: vehicle_type_id
+        description: vechile type identifier
+      - name: lat
+        description: latitude of an updated bike location
+      - name: lon
+        description: longitude of an updated bike location
+      - name: is_reserved
+        description: false (inactive) by default
+      - name: is_disabled
+        description: boolean for disabled bike
+      - name: pricing_plan_id
+        description: indicator for pricing plan of the bikeshare
+      - name: bike_geo_loc
+        description: longitutde and latitude cast as geography value
+      - name: time_diff_in_seconds
+        description: difference in time since the last inactive location update (seconds)
+      - name: is_start_movement
+        description: indicates if the location data has changed since the last update
+      - name: is_end_movement
+        description: indicates if the location data has stopped changing since the last update
+      - name: is_new_day_ct
+        description: indicates if the record is the first location update of the day for the bike
+      - name: is_new_month_ct
+        description: indicates if the record is the first location update of the month for the bike
+
+

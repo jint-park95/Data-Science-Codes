@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: fct_inactive_bike_trips
+    description: Aggregates any continuous changes in bike as a "trip"
+
+    columns:
+      - name: bike_id
+        description: identifier for individual bikes
+      - name: bike_trip_rank
+        description: number of "trips" aggregated for the give bike
+      - name: trip_begin_ct
+        description: datetime associated with the first location update of the trip
+      - name: trip_end_ct
+        description: datetime associated with the last location update of the trip
+      - name: trip_duration_second
+        description: difference between trip_begin_ct and trip_end_ct in seconds
+      - name: distance_meter
+        description: approximate total of distance travled during the trip
+      - name: meters_per_second
+        description: approximate average speed of the trip
+
